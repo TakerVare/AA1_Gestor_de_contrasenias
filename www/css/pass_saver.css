@@ -1,0 +1,130 @@
+/* Estilos específicos para pass_saver.html */
+
+.form-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.site-form {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #0095ff;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Grupo de password con botón */
+.password-group {
+    position: relative;
+}
+
+.password-input-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.password-input-container input {
+    flex: 1;
+}
+
+.btn-generate-password {
+    padding: 10px 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.2s;
+}
+
+.btn-generate-password:hover {
+    background-color: #e0e0e0;
+}
+
+/* Botones de acción */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-cancel-form,
+.btn-save-form {
+    padding: 12px 40px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-cancel-form {
+    background-color: #b91c1c;
+    color: white;
+}
+
+.btn-cancel-form:hover {
+    background-color: #991b1b;
+}
+
+.btn-save-form {
+    background-color: #0095ff;
+    color: white;
+}
+
+.btn-save-form:hover {
+    background-color: #0077cc;
+}
+
+/* Estilos para validaciones */
+.form-group input.error,
+.form-group textarea.error {
+    border-color: #b91c1c;
+    background-color: #fef2f2;
+}
+
+.error-message {
+    color: #b91c1c;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}

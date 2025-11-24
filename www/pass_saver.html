@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pass Saver - Add/Edit Site</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/pass_saver.css">
+  <script src="./js/api.js"></script>
+</head>
+
+<body>
+  <header class="header">
+    <div class="tittle">
+      <p>Pass saver</p>
+    </div>
+    <div class="nav-buttons-container">
+      <span class="minimizar"></span>
+      <span class="maximizar"></span>
+      <span class="cerrar"></span>
+    </div>
+  </header>
+
+  <main class="form-container">
+    <form id="site-form" class="site-form">
+      <div class="form-group">
+        <label for="site-url">URL</label>
+        <input type="text" id="site-url" name="url" placeholder="http://facebook.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="site-user">User</label>
+        <input type="text" id="site-user" name="user" placeholder="Greeting" required>
+      </div>
+
+      <div class="form-group password-group">
+        <label for="site-password">Password</label>
+        <div class="password-input-container">
+          <input type="password" id="site-password" name="password" placeholder="********" required>
+          <button type="button" class="btn-generate-password" id="btn-generate-password" title="Generar contraseña">
+            🔑
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="site-description">Description</label>
+        <textarea id="site-description" name="description" rows="8" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..."></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel-form" id="btn-cancel-form">Cancel</button>
+        <button type="submit" class="btn-save-form" id="btn-save-form">Save</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="./js/pass_saver.js"></script>
+</body>
+
+</html>

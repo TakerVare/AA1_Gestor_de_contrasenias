@@ -109,6 +109,94 @@ function drawSites(data) {
   });
 }
 
+// Función para inicializar el modal de añadir categoría
+function initModalAddCategory() {
+  const modal = document.getElementById('modal-add-category');
+  const btnAddCategory = document.getElementById('btn-add-category');
+  const btnCancel = document.getElementById('btn-cancel-category');
+  const btnOk = document.getElementById('btn-ok-category');
+  const inputName = document.getElementById('category-name');
+  const inputIcon = document.getElementById('category-icon');
+
+  // Abrir modal al hacer clic en "Add category"
+  btnAddCategory.addEventListener('click', () => {
+    modal.classList.add('show');
+    inputName.value = '';
+    inputIcon.value = '📁'; // Seleccionar el primer icono por defecto
+    inputName.focus();
+  });
+
+  // Cerrar modal al hacer clic en "Cancel"
+  btnCancel.addEventListener('click', () => {
+    modal.classList.remove('show');
+  });
+
+  // Cerrar modal al hacer clic fuera del contenido
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('show');
+    }
+  });
+
+  // Crear categoría al hacer clic en "OK"
+  btnOk.addEventListener('click', async () => {
+    const categoryName = inputName.value.trim();
+    const categoryIcon = inputIcon.value.trim() || '📁';
+
+    if (categoryName === '') {
+      alert('Por favor, introduce un nombre para la categoría');
+      return;
+    }
+
+    try {
+      await categoriesAPI.create({ name: categoryName, icon: categoryIcon });
+      modal.classList.remove('show');
+      await loadCategories();
+    } catch(error) {
+      console.error('Error al crear la categoría:', error);
+      alert('Error al crear la categoría');
+    }
+  });
+
+  // Permitir crear con Enter
+  inputName.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      btnOk.click();
+    }
+  });
+}
+
+// Función para eliminar una categoría
+async function deleteCategory(categoryId, categoryName) {
+  const confirmed = confirm(`¿Estás seguro de que quieres eliminar la categoría "${categoryName}"?`);
+  if (!confirmed) return;
+
+  try {
+    await categoriesAPI.delete(categoryId);
+    alert('Categoría eliminada correctamente');
+    await loadCategories();
+  } catch(error) {
+    console.error('Error al eliminar la categoría:', error);
+    alert('Error al eliminar la categoría');
+  }
+}
+
+// Función para inicializar el botón Add site
+function initAddSiteButton() {
+  const btnAddSite = document.querySelector('.cta-add-sites');
+
+  btnAddSite.addEventListener('click', () => {
+    const selectedCategory = document.querySelector('input[name="category"]:checked');
+
+    if (!selectedCategory) {
+      alert('Por favor, selecciona una categoría primero');
+      return;
+    }
+
+    const categoryId = selectedCategory.value;
+    window.location.href = `pass_saver.html?categoryId=${categoryId}`;
+  });
+}
 
 // Función para inicializar las acciones de la tabla (abrir, editar, eliminar)
 function initTableActions() {
