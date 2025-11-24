@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+.header {
+    background-color: rgb(241, 241, 241);
+    color: rgb(11, 11, 11);
+    display: flex;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.tittle {
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.nav-buttons-container {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.minimizar, .maximizar, .cerrar {
+    width: 15px;
+    height: 15px;
+    border: 1px;
+    border-radius: 50%;
+    border: solid 1px black;
+    cursor: pointer;
+}
+
+.switch-container {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+
+.cta-add-categories {
+    width: 150px;
+    justify-content: center;
+    height: 30px;
+    border: solid 1px #0095ff;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: #0095ff;
+    color: white;
+    cursor: pointer;
+}
+
+.cta-add-sites {
+    width: 150px;
+    justify-content: center;
+    height: 30px;
+    border: solid 1px #ccc;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: white;
+    color: rgb(11, 11, 11);
+    cursor: pointer;
+}
+
+.cta-add-categories:hover, .cta-add-sites:hover {
+    opacity: 0.8;
+}
+
+.main-container {
+    display: flex;
+    width: 100%;
+    padding: 0 15px;
+}
+
+.sidebar {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px #ccc;
+    background-color: white;
+    min-height: 300px;
+}
+
+.sidebar-header {
+    border-bottom: solid 1px #ccc;
+    font-size: 14px;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    background-color: #f9f9f9;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.categories-list li {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #0066cc;
+    transition: background-color 0.2s;
+}
+
+.categories-list li:hover {
+    background-color: #f0f0f0;
+}
+
+.categories-list li label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    user-select: none;
+}
+
+.categories-list li.hidden {
+    display: none;
+}
+
+.category-icon {
+    font-size: 16px;
+}
+
+.category-delete-btn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    padding: 0 5px;
+}
+
+.categories-list li:hover .category-delete-btn {
+    opacity: 1;
+}
+
+.category-delete-btn:hover {
+    color: #b91c1c;
+}
+
+.sites-table-container {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 3%;
+}
+
+.sites-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: solid 1px #ccc;
+    background-color: white;
+}
+
+thead {
+    background-color: #0095ff;
+}
+
+th {
+    border: solid 1px #0095ff;
+    background-color: #0095ff;
+    color: white;
+    padding: 8px;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: center;
+}
+
+td {
+    border: solid 1px #e0e0e0;
+    padding: 8px;
+    text-align: center;
+    font-size: 13px;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.actions-cell {
+    text-align: center;
+    padding: 8px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 2px 5px;
+    margin: 0 5px;
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.action-btn:hover {
+    transform: scale(1.2);
+}
+
+.action-btn.open-url {
+    color: #0066cc;
+}
+
+.action-btn.delete-site {
+    color: #666;
+}
+
+.action-btn.edit-site {
+    color: #666;
+}
+
+/* Estilos para radio buttons */
+.radio-button {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+/* Estilo cuando un item está seleccionado */
+.categories-list li:has(input:checked) {
+    background-color: #e3f2fd;
+    border-left: 3px solid #0095ff;
+    font-weight: 500;
+}
+
