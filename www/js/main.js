@@ -1,19 +1,23 @@
 window.onload = (event) => {
   //console.log("page is fully loaded");
   loadCategories();
+  initModalAddCategory();
   initAddSiteButton();
   initTableActions();
+  initSearch();
 };
 
 async function loadCategories(){
   try {
-    const response = await fetch(`http://localhost:3000/categories`);
-    if (!response.ok) throw new Error('Error al obtener categorías');
-    const data = await response.json();
+    const data = await categoriesAPI.getAll();
     drawCategories(data);
   } catch(error) {
     console.error('Error al cargar las categorías:', error);
-    alert('Error al cargar las categorías');
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Error al cargar las categorías"
+    });
   }
 }
 
@@ -74,9 +78,7 @@ async function loadSites(categoryId){
   tbody.innerHTML = '';
 
   try {
-    const response = await fetch(`http://localhost:3000/sites`);
-    if (!response.ok) throw new Error('Error al obtener sites');
-    const data = await response.json();
+    const data = await sitesAPI.getAll();
     const filteredSites = data.filter(site => site.categoryId === parseInt(categoryId));
     drawSites(filteredSites);
   } catch(error) {
@@ -144,7 +146,11 @@ function initModalAddCategory() {
     const categoryIcon = inputIcon.value.trim() || '📁';
 
     if (categoryName === '') {
-      alert('Por favor, introduce un nombre para la categoría');
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Por favor, introduce un nombre para la categoría"
+      });
       return;
     }
 
@@ -154,7 +160,11 @@ function initModalAddCategory() {
       await loadCategories();
     } catch(error) {
       console.error('Error al crear la categoría:', error);
-      alert('Error al crear la categoría');
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Error al crear la categoría"
+      });
     }
   });
 
@@ -173,11 +183,19 @@ async function deleteCategory(categoryId, categoryName) {
 
   try {
     await categoriesAPI.delete(categoryId);
-    alert('Categoría eliminada correctamente');
+    Swal.fire({
+      icon: "success",
+      title: "Yeah",
+      text: "Categoría eliminada correctamente"
+    });
     await loadCategories();
   } catch(error) {
     console.error('Error al eliminar la categoría:', error);
-    alert('Error al eliminar la categoría');
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Error al eliminar la categoría"
+    });
   }
 }
 
@@ -189,7 +207,11 @@ function initAddSiteButton() {
     const selectedCategory = document.querySelector('input[name="category"]:checked');
 
     if (!selectedCategory) {
-      alert('Por favor, selecciona una categoría primero');
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Por favor, selecciona una categoría primero"
+      });
       return;
     }
 
@@ -243,14 +265,68 @@ function initTableActions() {
 async function deleteSite(siteId) {
   try {
     await sitesAPI.delete(siteId);
-    alert('Sitio eliminado correctamente');
+    Swal.fire({
+      icon: "success",
+      title: "Yeah",
+      text: "Sitio eliminado correctamente"
+    });
     const selectedCategory = document.querySelector('input[name="category"]:checked');
     if (selectedCategory) {
       loadSites(selectedCategory.value);
     }
   } catch(error) {
     console.error('Error al eliminar el sitio:', error);
-    alert('Error al eliminar el sitio');
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Error al eliminar el sitio"
+    });
+    
   }
 }
 
+// Función para inicializar el buscador
+function initSearch() {
+  const searchInput = document.getElementById('search-input');
+  const btnSearch = document.getElementById('btn-search');
+
+  const performSearch = () => {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+
+    // Filtrar categorías
+    const categories = document.querySelectorAll('.categories-list li');
+    categories.forEach(category => {
+      const categoryName = category.getAttribute('data-category-name');
+      if (categoryName && categoryName.includes(searchTerm)) {
+        category.classList.remove('hidden');
+      } else {
+        category.classList.add('hidden');
+      }
+    });
+
+    // Filtrar sitios
+    const sites = document.querySelectorAll('#main-sites-table tbody tr');
+    sites.forEach(site => {
+      const url = site.getAttribute('data-site-url') || '';
+      const user = site.getAttribute('data-site-user') || '';
+      if (url.includes(searchTerm) || user.includes(searchTerm)) {
+        site.style.display = '';
+      } else {
+        site.style.display = 'none';
+      }
+    });
+  };
+
+  // Búsqueda en tiempo real mientras escribes
+  searchInput.addEventListener('input', performSearch);
+
+  // Búsqueda al hacer clic en el botón
+  btnSearch.addEventListener('click', performSearch);
+
+  // Búsqueda al presionar Enter
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      performSearch();
+    }
+  });
+}

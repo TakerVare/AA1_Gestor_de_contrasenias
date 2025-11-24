@@ -350,6 +350,13 @@ tbody tr:hover {
     border-color: #0095ff;
 }
 
+.category-icon-select {
+    cursor: pointer;
+}
+
+.category-icon-select option {
+    padding: 8px;
+}
 
 .modal-footer {
     padding: 15px 20px;

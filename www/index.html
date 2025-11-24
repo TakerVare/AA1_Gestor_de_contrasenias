@@ -7,7 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AA1 Gestor de contraseñas</title>
   <link rel="stylesheet" href="./css/styles.css">
+  <script src="./js/api.js"></script>
   <script src="./js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -21,6 +24,11 @@
       <span class="cerrar"></span>
     </div>
   </header>
+
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Buscar categorías o sitios..." />
+    <button class="btn-search" id="btn-search">Buscar</button>
+  </div>
 
   <div class="switch-container">
     <button class="cta-add-categories" id="btn-add-category">Add category</button>
@@ -36,6 +44,30 @@
       <div class="modal-body">
         <label for="category-name">Nombre</label>
         <input type="text" id="category-name" placeholder="Mi categoría" required />
+
+        <label for="category-icon" style="margin-top: 15px;">Icono</label>
+        <select id="category-icon" class="category-icon-select">
+          <option value="📁">📁 General</option>
+          <option value="📱">📱 Redes Sociales</option>
+          <option value="🛒">🛒 E-commerce / Shopping</option>
+          <option value="💼">💼 Business / Trabajo</option>
+          <option value="🎮">🎮 Gaming</option>
+          <option value="💰">💰 Finanzas / Bancos</option>
+          <option value="📚">📚 Educación</option>
+          <option value="🏥">🏥 Salud</option>
+          <option value="🍔">🍔 Comida / Restaurantes</option>
+          <option value="✈️">✈️ Viajes</option>
+          <option value="🎬">🎬 Entretenimiento / Streaming</option>
+          <option value="🏠">🏠 Hogar / Servicios</option>
+          <option value="💻">💻 Tecnología / Software</option>
+          <option value="🔒">🔒 Seguridad</option>
+          <option value="📧">📧 Email / Comunicación</option>
+          <option value="❤️">❤️ Relaciones / Citas</option>
+          <option value="🎵">🎵 Música</option>
+          <option value="📰">📰 Noticias / Medios</option>
+          <option value="⚙️">⚙️ Utilidades</option>
+          <option value="🌐">🌐 Internet / Web</option>
+        </select>
       </div>
       <div class="modal-footer">
         <button class="btn-cancel" id="btn-cancel-category">Cancel</button>
@@ -43,7 +75,7 @@
       </div>
     </div>
   </div>
-  
+
   <main class="main-container">
     <div class="sidebar">
       <div class="sidebar-header">
